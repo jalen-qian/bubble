@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!-- import CSS -->
+    <link rel="stylesheet" href="/static/css/index.css">
+    <link rel="stylesheet" href="/static/css/main.css">
+</head>
+
+<body>
+<div id="app">
+    <el-container>
+        <el-header>gin框架小练习</el-header>
+        <el-main>
+            <div class="con">
+                <el-divider content-position="center"><b>Bubble</b></el-divider>
+                <el-card class="box-card">
+                    <div class="text item">
+                        <el-input style="width: 60%" v-model="input" size="mini" placeholder="请输入待办事项..."></el-input>
+                        <el-button @click="addTodo" icon="el-icon-plus" type="primary" size="mini" circle></el-button>
+                        <el-divider></el-divider>
+                        <el-table
+                                size="mini"
+                                :data="todoList"
+                                style="width: 100%">
+                            <el-table-column
+                                    prop="id"
+                                    label="#"
+                                    width="50">
+                            </el-table-column>
+                            <el-table-column
+                                    align="center"
+                                    label="待办事项"
+                                    width="100">
+                                <template slot-scope="scope">
+                                    <span :class="{deleteLine:scope.row.status}">{{scope.row.title}}</span>
+                                </template>
+                            </el-table-column>
+                            <el-table-column
+                                    align="right"
+                                    label="操作">
+                                <template slot-scope="scope">
+                                    <el-button @click="completed(scope.row)" v-if="!scope.row.status" icon="el-icon-check" type="success" size="mini" circle></el-button>
+                                    <el-button @click="unfinished(scope.row)" v-else icon="el-icon-refresh-left" type="warning" size="mini" circle></el-button>
+                                    <el-button @click="deleteTodo(scope.row)" icon="el-icon-close" type="danger" size="mini" circle></el-button>
+                                </template>
+                            </el-table-column>
+                        </el-table>
+                    </div>
+                </el-card>
+            </div>
+        </el-main>
+    </el-container>
+    <el-dialog :visible.sync="visible" title="Hello world">
+        <p>Try Element</p>
+    </el-dialog>
+</div>
+</body>
+<!-- import Vue before Element -->
+<script src="/static/js/vue.js"></script>
+<!-- import JavaScript -->
+<script src="/static/js/element-ui.js"></script>
+<script src="/static/js/main.js"></script>
+</html>
